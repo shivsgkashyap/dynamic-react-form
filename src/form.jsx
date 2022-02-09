@@ -39,9 +39,8 @@ function Form() {
   };
 
   // const errorStyle = {
-  //   border: validatedInput ? "1px solid #b8bdc9" : "1px solid red",
+  //   border: firstNameValid ? "1px solid #b8bdc9" : "1px solid red",
   // };
-  // console.log(borderStyle);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -61,7 +60,9 @@ function Form() {
               <input
                 type="text"
                 name="firstName"
-                className="name-input-box"
+                className={
+                  formErrors.firstName ? "error-input-box" : "name-input-box"
+                }
                 value={formValues.firstName}
                 onChange={handleChange}
               />
@@ -72,7 +73,9 @@ function Form() {
               <input
                 type="text"
                 name="lastName"
-                className="name-input-box"
+                className={
+                  formErrors.lastName ? "error-input-box" : "name-input-box"
+                }
                 value={formValues.lastName}
                 onChange={handleChange}
               />
@@ -161,7 +164,11 @@ function Form() {
               <input
                 type="tel"
                 name="number"
-                className="phone-number-input-box"
+                className={
+                  formErrors.number
+                    ? "error-input-box"
+                    : "phone-number-input-box"
+                }
                 placeholder="(000) 000-0000"
                 value={formValues.number}
                 onChange={handleChange}
@@ -181,7 +188,9 @@ function Form() {
               <input
                 type="text"
                 name="email"
-                className="email-input-box"
+                className={
+                  formErrors.email ? "error-input-box" : "email-input-box"
+                }
                 placeholder="ex: email@yahoo.com"
                 value={formValues.email}
                 onChange={handleChange}

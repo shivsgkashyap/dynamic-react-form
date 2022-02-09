@@ -74,7 +74,11 @@
   flex: 1 1 100%;
 }
 
-input {
+.name-input-box,
+.address-input-box,
+.phone-number-input-box,
+.email-input-box,
+.name-input-box {
   width: 100%;
   outline: none;
   margin: 0;
@@ -84,6 +88,18 @@ input {
   padding: 0 0.625em;
   height: 2.5em;
   border: 1px solid #b8bdc9;
+}
+
+.error-input-box {
+  width: 100%;
+  outline: none;
+  margin: 0;
+  text-align: left;
+  font-size: 1em;
+  border-radius: 4px;
+  padding: 0 0.625em;
+  height: 2.5em;
+  border: 1px solid red;
 }
 
 .form-sub-label {
