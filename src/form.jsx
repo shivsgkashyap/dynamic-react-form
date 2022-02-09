@@ -3,6 +3,46 @@ import { useState } from "react";
 import "./form.css";
 
 function Form() {
+  const initialValues = { firstName: "", lastName: "", number: "", email: "" };
+  const [formValues, setFormValues] = useState({ initialValues });
+  const [formErrors, setFormErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+  };
+
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
+    if (!values.firstName) {
+      errors.firstName = "Field is required.";
+    }
+    if (!values.lastName) {
+      errors.lastName = "Field is required.";
+    }
+    if (!values.number) {
+      errors.number = "Field is required.";
+    }
+    if (!values.email) {
+      errors.email = "Field is required.";
+    } else if (!regex.test(values.email)) {
+      errors.email = "This is not a valid email";
+    }
+
+    return errors;
+  };
+
+  // const errorStyle = {
+  //   border: validatedInput ? "1px solid #b8bdc9" : "1px solid red",
+  // };
+  // console.log(borderStyle);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-flex">
