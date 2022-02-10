@@ -17,20 +17,26 @@ function Form() {
     setFormErrors(validate(formValues));
   };
 
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+    setFormErrors(validate(formValues));
+  };
+
   const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
     if (!values.firstName) {
-      errors.firstName = "Field is required.";
+      errors.firstName = "This field is required.";
     }
     if (!values.lastName) {
-      errors.lastName = "Field is required.";
+      errors.lastName = "This field is required.";
     }
     if (!values.number) {
-      errors.number = "Field is required.";
+      errors.number = "This field is required.";
     }
     if (!values.email) {
-      errors.email = "Field is required.";
+      errors.email = "This field is required.";
     } else if (!regex.test(values.email)) {
       errors.email = "This is not a valid email";
     }
@@ -38,9 +44,15 @@ function Form() {
     return errors;
   };
 
-  // const errorStyle = {
-  //   border: firstNameValid ? "1px solid #b8bdc9" : "1px solid red",
-  // };
+  const formLineStyle = {
+    "background-color":
+      formErrors.firstName || formErrors.lastName ? "#ffeded" : "white",
+  };
+
+  const errorMessageStyle = {
+    visibility:
+      formErrors.firstName || formErrors.lastName ? "visible" : "hidden",
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -50,38 +62,47 @@ function Form() {
             <h1 className="form-header-text">Customer Details:</h1>
           </div>
         </div>
-        <div className="form-line" id="id_1">
+        <div className="form-line" style={formLineStyle} id="id_1">
           <label className="form-label form-label-top">
             Full Name
             <span className="form-required"> * </span>
           </label>
           <div className="name-input">
-            <div className="form-sub-label-container">
-              <input
-                type="text"
-                name="firstName"
-                className={
-                  formErrors.firstName ? "error-input-box" : "name-input-box"
-                }
-                value={formValues.firstName}
-                onChange={handleChange}
-              />
-              <label className="form-sub-label"> First Name </label>
+            <div className="input-wrapper">
+              <div className="form-sub-label-container">
+                <input
+                  type="text"
+                  name="firstName"
+                  className={
+                    formErrors.firstName ? "error-input-box" : "name-input-box"
+                  }
+                  value={formValues.firstName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                <label className="form-sub-label"> First Name </label>
+              </div>
+              <div
+                className="form-sub-label-container"
+                style={{ "margin-left": "24px" }}
+              >
+                <input
+                  type="text"
+                  name="lastName"
+                  className={
+                    formErrors.lastName ? "error-input-box" : "name-input-box"
+                  }
+                  value={formValues.lastName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                <label className="form-sub-label"> Last Name </label>
+              </div>
             </div>
-            <p> {formErrors.firstName} </p>
-            <div className="form-sub-label-container">
-              <input
-                type="text"
-                name="lastName"
-                className={
-                  formErrors.lastName ? "error-input-box" : "name-input-box"
-                }
-                value={formValues.lastName}
-                onChange={handleChange}
-              />
-              <label className="form-sub-label"> Last Name </label>
+            <div class="form-error-message" style={errorMessageStyle}>
+              <img src="https://cdn.jotfor.ms/images/exclamation-octagon.png" />
+              {formErrors.firstName || formErrors.lastName}
             </div>
-            <div> {formErrors.lastName} </div>
           </div>
         </div>
         <div className="form-line" id="id_2">

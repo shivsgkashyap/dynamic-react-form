@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  letter-spacing: 0.3px;
 }
 
 .form-flex {
@@ -33,10 +34,9 @@
 .form-line {
   margin-top: 12px;
   margin-bottom: 12px;
+  display: flex;
   flex-wrap: wrap;
-}
-
-.form-line {
+  align-items: flex-start;
   padding: 12px 10px;
   margin: 29px 4px 0px;
   border-radius: 3px;
@@ -64,13 +64,17 @@
 }
 
 .name-input {
+  width: 100%;
+}
+
+.input-wrapper {
   display: flex;
-  gap: 25px;
+  align-items: flex-start;
 }
 
 .form-sub-label-container {
-  display: flex;
-  flex-direction: column;
+  vertical-align: top;
+  min-width: 0;
   flex: 1 1 100%;
 }
 
@@ -90,6 +94,10 @@
   border: 1px solid #b8bdc9;
 }
 
+.name-input-box:hover {
+  border-color: blue;
+}
+
 .error-input-box {
   width: 100%;
   outline: none;
@@ -100,6 +108,10 @@
   padding: 0 0.625em;
   height: 2.5em;
   border: 1px solid red;
+}
+
+.error-input-box:hover {
+  border-color: red;
 }
 
 .form-sub-label {
@@ -189,10 +201,11 @@
   font-size: 0.75em;
   margin-top: 8px;
   border-radius: 4px;
-  background-size: 0.875em;
-  background-position: 0.375em;
-  background-repeat: no-repeat;
   display: inline-block;
-  width: auto;
-  padding: 0.25em 0.5em 0.25em 1.625em;
+  padding: 0.25em 0.5em 0.25em 0.5em;
+}
+
+img {
+  width: 0.875em;
+  margin-right: 0.5em;
 }
