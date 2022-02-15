@@ -6,6 +6,8 @@ function Form() {
   const initialValues = { firstName: "", lastName: "", number: "", email: "" };
   const [formValues, setFormValues] = useState({ initialValues });
   const [formErrors, setFormErrors] = useState({});
+  const [touched, setTouched] = useState([]);
+  const [errorCounter, setErrorCounter] = useState(0);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,9 +20,7 @@ function Form() {
   };
 
   const handleBlur = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-    setFormErrors(validate(formValues));
+    setBlurErrors(validate(formValues));
   };
 
   const validate = (values) => {
@@ -41,6 +41,7 @@ function Form() {
       errors.email = "This is not a valid email";
     }
 
+    setErrorCounter(Object.keys(errors).length);
     return errors;
   };
 
@@ -53,6 +54,8 @@ function Form() {
     visibility:
       formErrors.firstName || formErrors.lastName ? "visible" : "hidden",
   };
+
+ 
 
   return (
     <form onSubmit={handleSubmit}>
@@ -296,6 +299,21 @@ function Form() {
           </div>
         </div>
         <button className="submit-btn">Submit</button>
+        <div className="error-navigation-container">
+          <div className="error-navigation-inner">
+            <span className="error-navigation-message">
+              {errorCounter > 1 ? "There are " : "There is "}
+              <strong>{errorCounter}</strong>{" "}
+              {errorCounter > 1
+                ? "errors in this page. Please correct them before moving on."
+                : "error in this page. Please correct it before moving on."}
+            </span>
+            <button className="error-navigation-next-button" type="button">
+              See Errors
+            </button>
+            <button className="error-navigation-done-button">Done</button>
+          </div>
+        </div>
       </div>
     </form>
   );

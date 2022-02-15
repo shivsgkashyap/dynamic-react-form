@@ -209,3 +209,63 @@ img {
   width: 0.875em;
   margin-right: 0.5em;
 }
+
+.error-navigation-container {
+  background-color: rgba(242, 58, 60, 0.94);
+  animation-name: fadeIn;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  color: #fff;
+  width: 100%;
+  position: fixed;
+  transition: 0.3s;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+}
+
+.error-navigation-inner {
+  max-width: 752px;
+  background-position: 0;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  transition-property: background-color, background-size, background-position,
+    padding;
+  transition-duration: 0.2s;
+  margin: 0 auto;
+}
+
+.error-navigation-message {
+  flex: 1;
+}
+
+.error-navigation-container button {
+  height: 40px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #fff;
+  color: #2c3345;
+}
+
+button {
+  outline: 0;
+}
+
+.error-navigation-message strong {
+  background-color: #fff;
+  color: #2c3345;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+button.error-navigation-done-button {
+  background-color: #18bd5b;
+  color: #fff;
+  display: none;
+}
