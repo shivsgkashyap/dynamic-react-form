@@ -1,5 +1,5 @@
 import react from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./form.css";
 
 function Form() {
@@ -8,6 +8,35 @@ function Form() {
   const [formErrors, setFormErrors] = useState({});
   const [touched, setTouched] = useState([]);
   const [errorCounter, setErrorCounter] = useState(0);
+  const [isSubmitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (isSubmitting) {
+      const noErrors = Object.keys(formErrors).length === 0;
+      if (noErrors) {
+        setTouched([]);
+        setSubmitting(false);
+      } else {
+        setSubmitting(false);
+      }
+    }
+  }, [formErrors]);
+
+  // need to rerun after there is a changed to touched
+  // this checks to see if there are any errors that should be highlighted
+  useEffect(() => {
+    const validationErrors = validate(formValues);
+    const touchedErrors = Object.keys(validationErrors)
+      .filter((key) => touched.includes(key)) // get all touched keys
+      .reduce((acc, key) => {
+        if (!acc[key]) {
+          acc[key] = validationErrors[key];
+        }
+        return acc;
+      }, {});
+    setFormErrors(touchedErrors);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [touched, formValues]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,10 +46,13 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
+    setSubmitting(true);
   };
 
-  const handleBlur = (e) => {
-    setBlurErrors(validate(formValues));
+  const handleBlur = (event) => {
+    if (!touched.includes(event.target.name)) {
+      setTouched([...touched, event.target.name]);
+    }
   };
 
   const validate = (values) => {
@@ -54,8 +86,6 @@ function Form() {
     visibility:
       formErrors.firstName || formErrors.lastName ? "visible" : "hidden",
   };
-
- 
 
   return (
     <form onSubmit={handleSubmit}>
@@ -196,6 +226,7 @@ function Form() {
                 placeholder="(000) 000-0000"
                 value={formValues.number}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
             </div>
             <p> {formErrors.number} </p>
@@ -218,6 +249,7 @@ function Form() {
                 placeholder="ex: email@yahoo.com"
                 value={formValues.email}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
               <label className="form-sub-label"> example@example.com </label>
             </div>
@@ -287,7 +319,7 @@ function Form() {
           <label className="form-label form-label-top">
             Please give reference of any two people whom you feel:
           </label>
-          <div className="reference grid">
+          <div className="reference-grid">
             <div className="form-sub-label-container">
               <input
                 type="text"
@@ -298,7 +330,17 @@ function Form() {
             </div>
           </div>
         </div>
-        <button className="submit-btn">Submit</button>
+
+        <div className="form-line" id="id_10">
+          <div className="submit-btn">
+            <div className="form-buttons-wrapper">
+              <button type="submit" className="form-submit-button">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div className="error-navigation-container">
           <div className="error-navigation-inner">
             <span className="error-navigation-message">
