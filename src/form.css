@@ -202,6 +202,88 @@
 .form-checkbox {
   width: 100%;
 }
+.form-table {
+  width: 100%;
+}
+
+.form-matrix-table {
+  display: grid;
+  grid-template-columns: 10% 25% 25% 40%;
+  width: 100%;
+}
+
+.form-textbox,
+.grid-cell {
+  width: 100%;
+}
+
+.form-matrix-values {
+  border-left: 1px solid #c3cad8;
+  border-bottom: 1px solid #c3cad8;
+  position: relative;
+}
+
+.small-top {
+  border: none;
+}
+
+.top-style {
+  text-align: center;
+  border-top: 1px solid #c3cad8;
+  background-color: #e5eaf4;
+  position: relative;
+  font-size: 0.75em;
+  font-weight: 500;
+  padding: 12px;
+}
+
+.name-style {
+  border-radius: 4px 0 0;
+}
+
+.end-style {
+  border-right: 1px solid #c3cad8;
+}
+
+#smooth-style-top {
+  border-radius: 0 4px 0;
+}
+
+#smooth-style-bottom {
+  border-radius: 0 0 4px;
+}
+
+.small-middle,
+.small-bottom {
+  background-color: #e5eaf4;
+  position: relative;
+  font-size: 0.75em;
+  font-weight: 500;
+  padding: 12px;
+}
+
+.middle-style,
+.bottom-style {
+  background-color: #fff;
+  text-align: center;
+  padding: 0;
+  position: relative;
+}
+
+.small-bottom {
+  border-radius: 0 0 0 4px;
+}
+
+.form-textbox {
+  font-size: 1em;
+  min-width: 100%;
+  outline: none;
+  margin: 0;
+  text-align: left;
+  padding: 0 0.625em;
+  height: 2.5em;
+  border: 1px solid #fff;
+}
 
 #id_10 {
   padding: 0;
@@ -221,10 +303,6 @@
   margin: 10px -38px 10px;
   padding: 30px 52px;
   border-top: 1px solid #e5e7f2;
-}
-
-.jf-form-buttons:not(.form-pagebreak-back) {
-  margin-left: 10px;
 }
 
 .form-submit-button {
@@ -317,4 +395,69 @@ button.error-navigation-done-button {
   background-color: #18bd5b;
   color: #fff;
   display: none;
+}
+
+.branding21.formFooter {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
+    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  background-color: #0a1551;
+}
+
+.formFooter,
+.formFooter-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.formFooter {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 0.875em;
+  background-color: #0a1551;
+  z-index: 2;
+  height: 44px;
+}
+
+.formFooter-wrapper.formFooter-leftSide {
+  margin-right: auto;
+}
+
+.formFooter,
+.formFooter-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.branding21.formFooter .formFooter-text {
+  color: white;
+}
+.formFooter-rightSide .formFooter-text {
+  color: white;
+  font-size: 0.75em;
+  margin-right: 0.9375em;
+}
+
+.branding21.formFooter .formFooter-button {
+  background-color: #78bb07;
+  border-color: #78bb07;
+}
+
+.formFooter-button,
+.submit-button {
+  background-color: #18bd5b;
+  border-color: #18bd5b;
+  color: #fff;
+}
+.formFooter-button {
+  display: flex;
+  justify-content: center;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 200px;
+  padding: 0.625em 0;
+  border-radius: 3px;
+  font-size: 0.875em;
+  transition: background-color 0.3s;
 }

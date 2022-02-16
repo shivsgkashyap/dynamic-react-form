@@ -10,20 +10,23 @@ function Form() {
   const [errorCounter, setErrorCounter] = useState(0);
   const [isSubmitting, setSubmitting] = useState(false);
 
+  // Clear touched & Update Error counter after submitting
   useEffect(() => {
     if (isSubmitting) {
       const noErrors = Object.keys(formErrors).length === 0;
       if (noErrors) {
         setTouched([]);
         setSubmitting(false);
+        setErrorCounter(Object.keys(formErrors).length);
       } else {
         setSubmitting(false);
+        setErrorCounter(Object.keys(formErrors).length);
       }
     }
   }, [formErrors]);
 
-  // need to rerun after there is a changed to touched
-  // this checks to see if there are any errors that should be highlighted
+  // Need to rerun after there is a changed to touched
+  // This checks to see if there are any errors that should be highlighted
   useEffect(() => {
     const validationErrors = validate(formValues);
     const touchedErrors = Object.keys(validationErrors)
@@ -35,7 +38,6 @@ function Form() {
         return acc;
       }, {});
     setFormErrors(touchedErrors);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [touched, formValues]);
 
   const handleChange = (e) => {
@@ -52,6 +54,7 @@ function Form() {
   const handleBlur = (event) => {
     if (!touched.includes(event.target.name)) {
       setTouched([...touched, event.target.name]);
+      setErrorCounter(touched.length);
     }
   };
 
@@ -72,8 +75,6 @@ function Form() {
     } else if (!regex.test(values.email)) {
       errors.email = "This is not a valid email";
     }
-
-    setErrorCounter(Object.keys(errors).length);
     return errors;
   };
 
@@ -315,18 +316,54 @@ function Form() {
           </div>
         </div>
 
-        <div className="form-line" id="id_9">
+        <div className="form-line" id="id_11">
           <label className="form-label form-label-top">
             Please give reference of any two people whom you feel:
           </label>
-          <div className="reference-grid">
-            <div className="form-sub-label-container">
-              <input
-                type="text"
-                className="email-input-box"
-                placeholder="ex: email@yahoo.com"
-              />
-              <label className="form-sub-label"> example@example.com </label>
+          <div id="cid_14" className="form-table">
+            <div className="form-matrix-table">
+              <div className="form-matrix-values small-top">
+                <div className="grid-cell"></div>
+              </div>
+              <div className="form-matrix-values top-style name-style">
+                <div className="grid-cell"> Full Name </div>
+              </div>
+              <div className="form-matrix-values top-style">
+                <div className="grid-cell"> Address </div>
+              </div>
+              <div
+                className="form-matrix-values top-style end-style"
+                id="smooth-style-top"
+              >
+                <div className="grid-cell"> Contact Number </div>
+              </div>
+              <div className="form-matrix-values small-middle">
+                <div className="grid-cell"> 1 </div>
+              </div>
+              <div className="form-matrix-values middle-style">
+                <input type="text" className="form-textbox" />
+              </div>
+              <div className="form-matrix-values middle-style">
+                <input type="text" className="form-textbox" />
+              </div>
+              <div className="form-matrix-values middle-style end-style">
+                <input type="text" className="form-textbox" />
+              </div>
+              <div className="form-matrix-values small-bottom">
+                <div className="grid-cell"> 2 </div>
+              </div>
+              <div className="form-matrix-values bottom-style">
+                <input type="text" className="form-textbox" />
+              </div>
+              <div className="form-matrix-values bottom-style">
+                <input type="text" className="form-textbox" />
+              </div>
+              <div
+                className="form-matrix-values bottom-style end-style"
+                id="smooth-style-bottom"
+              >
+                <input type="text" className="form-textbox" />
+              </div>
             </div>
           </div>
         </div>
@@ -355,6 +392,34 @@ function Form() {
             </button>
             <button className="error-navigation-done-button">Done</button>
           </div>
+        </div>
+      </div>
+      <div className="formFooter">
+        <div class="formFooter-wrapper formFooter-leftSide">
+          <a
+            href="https://www.jotform.com/?utm_source=formfooter&amp;utm_medium=banner&amp;utm_term=220256703245348&amp;utm_content=jotform_logo&amp;utm_campaign=powered_by_jotform_le"
+            target="_blank"
+            class="formFooter-logoLink"
+          >
+            <img
+              class="formFooter-logo"
+              src="https://cdn.jotfor.ms/assets/img/logo2021/jotform-logo-white.svg"
+              alt="Jotform Logo"
+              style={{ height: "44px", width: "132px" }}
+            />
+          </a>
+        </div>
+        <div class="formFooter-wrapper formFooter-rightSide">
+          <span class="formFooter-text">
+            Now create your own Jotform - It's free!
+          </span>
+          <a
+            class="formFooter-button"
+            href="https://www.jotform.com/?utm_source=formfooter&amp;utm_medium=banner&amp;utm_term=220256703245348&amp;utm_content=jotform_button&amp;utm_campaign=powered_by_jotform_le"
+            target="_blank"
+          >
+            Create your own Jotform
+          </a>
         </div>
       </div>
     </form>
