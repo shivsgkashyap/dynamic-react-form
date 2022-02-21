@@ -94,7 +94,7 @@
   border: 1px solid #b8bdc9;
 }
 
-.name-input-box:hover {
+input:hover {
   border-color: blue;
 }
 
@@ -199,8 +199,13 @@
   width: 100%;
 }
 
-.form-checkbox {
+.form-checkboxes {
   width: 100%;
+}
+
+.form-checkbox {
+  flex: 0 1 5%;
+  margin-bottom: 10px;
 }
 .form-table {
   width: 100%;
@@ -391,10 +396,22 @@ button {
   padding: 4px 10px;
   border-radius: 20px;
 }
+
+.error-navigation-container.is-success {
+  color: #2c3345;
+  background-color: rgba(201, 251, 203, 0.95);
+}
+
 button.error-navigation-done-button {
   background-color: #18bd5b;
   color: #fff;
-  display: none;
+  height: 40px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .branding21.formFooter {

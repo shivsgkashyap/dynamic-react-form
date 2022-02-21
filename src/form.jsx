@@ -3,12 +3,18 @@ import { useState, useEffect } from "react";
 import "./form.css";
 
 function Form() {
-  const initialValues = { firstName: "", lastName: "", number: "", email: "" };
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    number: "",
+    address: "",
+  };
   const [formValues, setFormValues] = useState({ initialValues });
   const [formErrors, setFormErrors] = useState({});
   const [touched, setTouched] = useState([]);
-  const [errorCounter, setErrorCounter] = useState(0);
   const [isSubmitting, setSubmitting] = useState(false);
+  const errorCounter = Object.keys(formErrors).length;
+  const [errorMessageVisibility, setErrorMessageVisibility] = useState(false);
 
   // Clear touched & Update Error counter after submitting
   useEffect(() => {
@@ -17,13 +23,11 @@ function Form() {
       if (noErrors) {
         setTouched([]);
         setSubmitting(false);
-        setErrorCounter(Object.keys(formErrors).length);
       } else {
         setSubmitting(false);
-        setErrorCounter(Object.keys(formErrors).length);
       }
     }
-  }, [formErrors]);
+  }, [isSubmitting, formErrors]);
 
   // Need to rerun after there is a changed to touched
   // This checks to see if there are any errors that should be highlighted
@@ -40,6 +44,14 @@ function Form() {
     setFormErrors(touchedErrors);
   }, [touched, formValues]);
 
+  useEffect(() => {
+    if (errorCounter >= 1) {
+      setErrorMessageVisibility(true);
+    }
+  }, [errorCounter, errorMessageVisibility]);
+
+  console.log(errorMessageVisibility);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -54,8 +66,15 @@ function Form() {
   const handleBlur = (event) => {
     if (!touched.includes(event.target.name)) {
       setTouched([...touched, event.target.name]);
-      setErrorCounter(touched.length);
     }
+  };
+
+  const handleDoneClick = (e) => {
+    window.scroll({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+    setErrorMessageVisibility(false);
   };
 
   const validate = (values) => {
@@ -70,9 +89,10 @@ function Form() {
     if (!values.number) {
       errors.number = "This field is required.";
     }
-    if (!values.email) {
+    if (!values.address) {
       errors.email = "This field is required.";
-    } else if (!regex.test(values.email)) {
+    }
+    if (!regex.test(values.email)) {
       errors.email = "This is not a valid email";
     }
     return errors;
@@ -91,6 +111,51 @@ function Form() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-flex">
+        <div
+          className={
+            errorMessageVisibility && errorCounter >= 1
+              ? "error-navigation-container"
+              : "error-navigation-container is-success"
+          }
+          style={{ visibility: errorMessageVisibility ? "visible" : "hidden" }}
+        >
+          <div className="error-navigation-inner">
+            <span
+              className="error-navigation-message"
+              style={{ display: errorCounter >= 1 ? "block" : "none" }}
+            >
+              {errorCounter > 1 ? "There are " : "There is "}
+              <strong>{errorCounter}</strong>{" "}
+              {errorCounter > 1
+                ? "errors in this page. Please correct them before moving on."
+                : "error in this page. Please correct it before moving on."}
+            </span>
+            <span
+              className="error-navigation-message"
+              style={{ display: errorCounter < 1 ? "block" : "none" }}
+            >
+              Well done! All errors are fixed.
+            </span>
+            <button
+              className="error-navigation-next-button"
+              type="button"
+              style={{ visibility: errorCounter >= 1 ? "visible" : "hidden" }}
+            >
+              See Errors
+            </button>
+            <button
+              className="error-navigation-done-button"
+              style={{
+                display:
+                  errorMessageVisibility && errorCounter < 1 ? "block" : "none",
+              }}
+              type="button"
+              onClick={handleDoneClick}
+            >
+              Done
+            </button>
+          </div>
+        </div>
         <div className="header-container">
           <div className="form-header">
             <h1 className="form-header-text">Customer Details:</h1>
@@ -235,10 +300,7 @@ function Form() {
         </div>
 
         <div className="form-line" id="id_4">
-          <label className="form-label form-label-top">
-            E-mail
-            <span className="form-required"> * </span>
-          </label>
+          <label className="form-label form-label-top">E-mail</label>
           <div className="email-input">
             <div className="form-sub-label-container">
               <input
@@ -299,7 +361,7 @@ function Form() {
             Will you be willing to recommend us?
           </label>
           <div className="recommend-input">
-            <div className="form-checkbox">
+            <div className="form-checkboxes">
               <div className="form-checkbox-item">
                 <input type="checkbox" className="form-checkbox" />
                 <label> Yes </label>
@@ -376,50 +438,6 @@ function Form() {
               </button>
             </div>
           </div>
-        </div>
-
-        <div className="error-navigation-container">
-          <div className="error-navigation-inner">
-            <span className="error-navigation-message">
-              {errorCounter > 1 ? "There are " : "There is "}
-              <strong>{errorCounter}</strong>{" "}
-              {errorCounter > 1
-                ? "errors in this page. Please correct them before moving on."
-                : "error in this page. Please correct it before moving on."}
-            </span>
-            <button className="error-navigation-next-button" type="button">
-              See Errors
-            </button>
-            <button className="error-navigation-done-button">Done</button>
-          </div>
-        </div>
-      </div>
-      <div className="formFooter">
-        <div class="formFooter-wrapper formFooter-leftSide">
-          <a
-            href="https://www.jotform.com/?utm_source=formfooter&amp;utm_medium=banner&amp;utm_term=220256703245348&amp;utm_content=jotform_logo&amp;utm_campaign=powered_by_jotform_le"
-            target="_blank"
-            class="formFooter-logoLink"
-          >
-            <img
-              class="formFooter-logo"
-              src="https://cdn.jotfor.ms/assets/img/logo2021/jotform-logo-white.svg"
-              alt="Jotform Logo"
-              style={{ height: "44px", width: "132px" }}
-            />
-          </a>
-        </div>
-        <div class="formFooter-wrapper formFooter-rightSide">
-          <span class="formFooter-text">
-            Now create your own Jotform - It's free!
-          </span>
-          <a
-            class="formFooter-button"
-            href="https://www.jotform.com/?utm_source=formfooter&amp;utm_medium=banner&amp;utm_term=220256703245348&amp;utm_content=jotform_button&amp;utm_campaign=powered_by_jotform_le"
-            target="_blank"
-          >
-            Create your own Jotform
-          </a>
         </div>
       </div>
     </form>
