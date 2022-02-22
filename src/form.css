@@ -3,6 +3,38 @@
   letter-spacing: 0.3px;
 }
 
+@media screen and (max-width: 768px) {
+  .form-all {
+    margin: 0px !important;
+  }
+}
+
+.form-all {
+  border-radius: 3px;
+  box-shadow: 0 4px 4px rgb(87 100 126 / 21%);
+  background-color: #fff;
+  max-width: 752px;
+  display: flex;
+  flex-direction: column;
+  margin: 72px auto;
+  width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+  .form-flex {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form-flex {
+    max-width: inherit !important;
+    margin: 0 !important;
+    padding: 0 14px !important;
+  }
+}
+
 .form-flex {
   display: flex;
   align-items: flex-start;
@@ -15,6 +47,19 @@
 
 .header-container {
   width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+  .form-header {
+    margin: 0 !important;
+    padding: 28px 14px !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .form-header {
+    margin: 0 -14px;
+    padding: 28px;
+  }
 }
 
 .form-header {
@@ -67,9 +112,21 @@
   width: 100%;
 }
 
+@media screen and (max-width: 480px) {
+  .first-name {
+    flex: 1 1 48%;
+  }
+}
+
 .input-wrapper {
   display: flex;
   align-items: flex-start;
+}
+
+@media screen and (max-width: 480px) {
+  .sub-label-media {
+    margin-left: 8px;
+  }
 }
 
 .form-sub-label-container {
@@ -92,6 +149,12 @@
   padding: 0 0.625em;
   height: 2.5em;
   border: 1px solid #b8bdc9;
+}
+
+@media screen and (max-width: 480px) {
+  input {
+    width: 100% !important;
+  }
 }
 
 input:hover {
@@ -164,6 +227,14 @@ input:hover {
   margin-left: 24px;
 }
 
+@media screen and (max-width: 480px) {
+  .phone-number-input,
+  .email-input,
+  .hear-input {
+    width: 100% !important;
+  }
+}
+
 .phone-number-input {
   width: calc(50% - 14px);
 }
@@ -209,6 +280,31 @@ input:hover {
 }
 .form-table {
   width: 100%;
+}
+
+@media screen and (max-width: 480px),
+  screen and (max-device-width: 768px) and (orientation: portrait),
+  screen and (max-device-width: 415px) and (orientation: landscape) {
+  .form-label-ref {
+    padding-right: 4px !important;
+  }
+}
+
+.form-label-ref {
+  width: 100%;
+  margin-left: 2px;
+  margin-bottom: 14px;
+  font-weight: 550;
+  color: #2c3345;
+  display: inline-block;
+  font-size: 16px;
+  word-break: break-word;
+}
+
+@media screen and (max-width: 480px) {
+  .form-matrix-table {
+    width: 100% !important;
+  }
 }
 
 .form-matrix-table {
@@ -300,6 +396,21 @@ input:hover {
   width: 100%;
 }
 
+@media screen and (max-width: 480px) {
+  .form-buttons-wrapper {
+    padding: 30px 14px !important;
+    margin: 0 !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form-buttons-wrapper {
+    margin: 0 -14px !important;
+    padding: 30px 14px !important;
+    flex-wrap: nowrap !important;
+  }
+}
+
 .form-buttons-wrapper {
   justify-content: flex-start;
   display: flex;
@@ -308,6 +419,15 @@ input:hover {
   margin: 10px -38px 10px;
   padding: 30px 52px;
   border-top: 1px solid #e5e7f2;
+}
+
+@media screen and (max-width: 480px) {
+  .form-submit-button {
+    width: 100% !important;
+    margin-left: 0 !important;
+    justify-content: center !important;
+    min-width: 100px !important;
+  }
 }
 
 .form-submit-button {
@@ -412,69 +532,4 @@ button.error-navigation-done-button {
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-}
-
-.branding21.formFooter {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
-    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-  background-color: #0a1551;
-}
-
-.formFooter,
-.formFooter-wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.formFooter {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0 0.875em;
-  background-color: #0a1551;
-  z-index: 2;
-  height: 44px;
-}
-
-.formFooter-wrapper.formFooter-leftSide {
-  margin-right: auto;
-}
-
-.formFooter,
-.formFooter-wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.branding21.formFooter .formFooter-text {
-  color: white;
-}
-.formFooter-rightSide .formFooter-text {
-  color: white;
-  font-size: 0.75em;
-  margin-right: 0.9375em;
-}
-
-.branding21.formFooter .formFooter-button {
-  background-color: #78bb07;
-  border-color: #78bb07;
-}
-
-.formFooter-button,
-.submit-button {
-  background-color: #18bd5b;
-  border-color: #18bd5b;
-  color: #fff;
-}
-.formFooter-button {
-  display: flex;
-  justify-content: center;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  width: 200px;
-  padding: 0.625em 0;
-  border-radius: 3px;
-  font-size: 0.875em;
-  transition: background-color 0.3s;
 }

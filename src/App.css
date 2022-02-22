@@ -1,12 +1,3 @@
 * {
   box-sizing: border-box;
 }
-
-.App {
-  border-radius: 3px;
-  box-shadow: 0 4px 4px rgb(87 100 126 / 21%);
-  background-color: #fff;
-  max-width: 752px;
-  margin: 72px auto;
-  width: 100%;
-}
