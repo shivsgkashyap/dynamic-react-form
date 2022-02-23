@@ -15,7 +15,7 @@ function Form() {
   const [isSubmitting, setSubmitting] = useState(false);
   const errorCounter = Object.keys(formErrors).length;
   const [errorMessageVisibility, setErrorMessageVisibility] = useState(false);
-  console.log(formErrors);
+  console.log(touched);
 
   // Clear touched & Update Error counter after submitting
   useEffect(() => {
@@ -26,6 +26,7 @@ function Form() {
         setSubmitting(false);
       } else {
         setSubmitting(false);
+        setTouched(Object.keys(formErrors));
       }
     }
   }, [isSubmitting, formErrors]);
@@ -58,6 +59,7 @@ function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setFormErrors(validate(formValues));
     setSubmitting(true);
   };
