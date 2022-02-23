@@ -15,6 +15,7 @@ function Form() {
   const [isSubmitting, setSubmitting] = useState(false);
   const errorCounter = Object.keys(formErrors).length;
   const [errorMessageVisibility, setErrorMessageVisibility] = useState(false);
+  console.log(formErrors);
 
   // Clear touched & Update Error counter after submitting
   useEffect(() => {
@@ -50,8 +51,6 @@ function Form() {
     }
   }, [errorCounter, errorMessageVisibility]);
 
-  console.log(errorMessageVisibility);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -75,6 +74,18 @@ function Form() {
       behavior: "smooth",
     });
     setErrorMessageVisibility(false);
+  };
+
+  const handleErrorClick = (e) => {
+    const keys = Object.keys(formErrors);
+    if (keys.length > 0) {
+      const errorElement = document.querySelector(`input[name="${keys[0]}"]`);
+      errorElement.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "start",
+      });
+    }
   };
 
   const validate = (values) => {
@@ -142,6 +153,7 @@ function Form() {
               <button
                 className="error-navigation-next-button"
                 type="button"
+                onClick={handleErrorClick}
                 style={{ visibility: errorCounter >= 1 ? "visible" : "hidden" }}
               >
                 See Errors
