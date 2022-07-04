@@ -1,21 +1,23 @@
 import react from "react";
 import { useState, useEffect } from "react";
 import "./form.css";
+import Input from "./components/input";
+import Recommendations from "./components/recommendations";
 
-function Form() {
+export default function Form() {
   const initialValues = {
     firstName: "",
     lastName: "",
     number: "",
     address: "",
   };
+
   const [formValues, setFormValues] = useState({ initialValues });
   const [formErrors, setFormErrors] = useState({});
   const [touched, setTouched] = useState([]);
   const [isSubmitting, setSubmitting] = useState(false);
   const errorCounter = Object.keys(formErrors).length;
   const [errorMessageVisibility, setErrorMessageVisibility] = useState(false);
-  console.log(touched);
 
   // Clear touched & Update Error counter after submitting
   useEffect(() => {
@@ -59,7 +61,6 @@ function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    e.stopPropagation();
     setFormErrors(validate(formValues));
     setSubmitting(true);
   };
@@ -103,7 +104,7 @@ function Form() {
       errors.number = "This field is required.";
     }
     if (!values.address) {
-      errors.email = "This field is required.";
+      errors.address = "This field is required.";
     }
     if (!regex.test(values.email)) {
       errors.email = "This is not a valid email";
@@ -188,17 +189,12 @@ function Form() {
             <div className="name-input">
               <div className="input-wrapper">
                 <div className="form-sub-label-container first-name">
-                  <input
-                    type="text"
-                    name="firstName"
-                    className={
-                      formErrors.firstName
-                        ? "error-input-box"
-                        : "name-input-box"
-                    }
-                    value={formValues.firstName}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                  <Input
+                    value="firstName"
+                    formErrors={formErrors}
+                    formValues={formValues}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
                   />
                   <label className="form-sub-label"> First Name </label>
                 </div>
@@ -206,15 +202,12 @@ function Form() {
                   className="form-sub-label-container sub-label-media"
                   style={{ "margin-left": "24px" }}
                 >
-                  <input
-                    type="text"
-                    name="lastName"
-                    className={
-                      formErrors.lastName ? "error-input-box" : "name-input-box"
-                    }
-                    value={formValues.lastName}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                  <Input
+                    value="lastName"
+                    formErrors={formErrors}
+                    formValues={formValues}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
                   />
                   <label className="form-sub-label"> Last Name </label>
                 </div>
@@ -343,7 +336,6 @@ function Form() {
           <div className="form-line" id="id_5">
             <label className="form-label form-label-top">
               How did you hear about us?
-              <span className="form-required"> * </span>
             </label>
             <div className="hear-input">
               <select class="hear-dropdown">
@@ -394,57 +386,7 @@ function Form() {
               </div>
             </div>
           </div>
-          <div className="form-line" id="id_11">
-            <label className="form-label-ref">
-              Please give reference of any two people whom you feel:
-            </label>
-            <div id="cid_14" className="form-table">
-              <div className="form-matrix-table">
-                <div className="form-matrix-values small-top">
-                  <div className="grid-cell"></div>
-                </div>
-                <div className="form-matrix-values top-style name-style">
-                  <div className="grid-cell"> Full Name </div>
-                </div>
-                <div className="form-matrix-values top-style">
-                  <div className="grid-cell"> Address </div>
-                </div>
-                <div
-                  className="form-matrix-values top-style end-style"
-                  id="smooth-style-top"
-                >
-                  <div className="grid-cell"> Contact Number </div>
-                </div>
-                <div className="form-matrix-values small-middle">
-                  <div className="grid-cell"> 1 </div>
-                </div>
-                <div className="form-matrix-values middle-style">
-                  <input type="text" className="form-textbox" />
-                </div>
-                <div className="form-matrix-values middle-style">
-                  <input type="text" className="form-textbox" />
-                </div>
-                <div className="form-matrix-values middle-style end-style">
-                  <input type="text" className="form-textbox" />
-                </div>
-                <div className="form-matrix-values small-bottom">
-                  <div className="grid-cell"> 2 </div>
-                </div>
-                <div className="form-matrix-values bottom-style">
-                  <input type="text" className="form-textbox" />
-                </div>
-                <div className="form-matrix-values bottom-style">
-                  <input type="text" className="form-textbox" />
-                </div>
-                <div
-                  className="form-matrix-values bottom-style end-style"
-                  id="smooth-style-bottom"
-                >
-                  <input type="text" className="form-textbox" />
-                </div>
-              </div>
-            </div>
-          </div>
+          <Recommendations />
           <div className="form-line" id="id_10">
             <div className="submit-btn">
               <div className="form-buttons-wrapper">
@@ -459,5 +401,3 @@ function Form() {
     </form>
   );
 }
-
-export default Form;
