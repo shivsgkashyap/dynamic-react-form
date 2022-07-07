@@ -1,18 +1,11 @@
 import react from "react";
 import { useState, useEffect } from "react";
-import "./form.css";
-import Input from "./components/input";
-import Recommendations from "./components/recommendations";
+import "./Form.css";
+import DynamicInput from "./components/DynamicInput";
+import Recommendations from "./components/Recommendations";
 
-export default function Form() {
-  const initialValues = {
-    firstName: "",
-    lastName: "",
-    number: "",
-    address: "",
-  };
-
-  const [formValues, setFormValues] = useState({ initialValues });
+export default function Form({ sections }) {
+  const [formValues, setFormValues] = useState({});
   const [formErrors, setFormErrors] = useState({});
   const [touched, setTouched] = useState([]);
   const [isSubmitting, setSubmitting] = useState(false);
@@ -121,7 +114,7 @@ export default function Form() {
     visibility:
       formErrors.firstName || formErrors.lastName ? "visible" : "hidden",
   };
-
+  console.log(formErrors);
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-all">
@@ -181,114 +174,36 @@ export default function Form() {
               <h1 className="form-header-text">Customer Details:</h1>
             </div>
           </div>
-          <div className="form-line" style={formLineStyle} id="id_1">
-            <label className="form-label form-label-top">
-              Full Name
-              <span className="form-required"> * </span>
-            </label>
-            <div className="name-input">
-              <div className="input-wrapper">
-                <div className="form-sub-label-container first-name">
-                  <Input
-                    value="firstName"
-                    formErrors={formErrors}
-                    formValues={formValues}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                  />
-                  <label className="form-sub-label"> First Name </label>
-                </div>
-                <div
-                  className="form-sub-label-container sub-label-media"
-                  style={{ "margin-left": "24px" }}
-                >
-                  <Input
-                    value="lastName"
-                    formErrors={formErrors}
-                    formValues={formValues}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                  />
-                  <label className="form-sub-label"> Last Name </label>
-                </div>
-              </div>
-              <div class="form-error-message" style={errorMessageStyle}>
-                <img src="https://cdn.jotfor.ms/images/exclamation-octagon.png" />
-                {formErrors.firstName || formErrors.lastName}
-              </div>
+          {sections.map((section) => (
+            <div className="form-line" style={formLineStyle}>
+              {section.map((inputConfig) => (
+                <DynamicInput
+                  inputConfig={inputConfig}
+                  value={formValues[inputConfig.name]}
+                  formErrors={formErrors}
+                  formValues={formValues}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  errorMessageStyle={errorMessageStyle}
+                />
+              ))}
             </div>
-          </div>
-          <div className="form-line" id="id_2">
-            <label className="form-label form-label-top">
-              Address
-              <span className="form-required">*</span>
-            </label>
-            <div className="address-input">
-              <div className="address-table">
-                <div className="form-address-line-wrapper-top">
-                  <div className="form-address-street-line">
-                    <div className="form-sub-label-container">
-                      <input
-                        type="text"
-                        className="address-input-box"
-                        value={formValues.address}
-                      />
-                      <label className="form-sub-label"> Street Address </label>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-address-line-wrapper">
-                  <div className="form-address-street-line">
-                    <div className="form-sub-label-container">
-                      <input
-                        type="text"
-                        className="address-input-box"
-                        value={formValues.address}
-                      />
-                      <label className="form-sub-label">
-                        Street Address Line 2
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-address-line-wrapper">
-                  <div className="form-address-city-line">
-                    <div className="form-sub-label-container">
-                      <input type="text" className="address-input-box" />
-                      <label className="form-sub-label"> City </label>
-                    </div>
-                  </div>
-                  <div className="form-address-state-line sub-label-media">
-                    <div className="form-sub-label-container">
-                      <input
-                        type="text"
-                        className="address-input-box"
-                        value={formValues.address}
-                      />
-                      <label className="form-sub-label">
-                        {" "}
-                        State / Province{" "}
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-address-line-wrapper">
-                  <div className="form-address-zip-line">
-                    <div className="form-sub-label-container">
-                      <input
-                        type="text"
-                        className="address-input-box"
-                        value={formValues.address}
-                      />
-                      <label className="form-sub-label">
-                        Postal / Zip Code
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          ))}
+          {sections.map((section) => (
+            <div className="form-line" style={formLineStyle}>
+              {section.map((inputConfig) => (
+                <DynamicInput
+                  inputConfig={inputConfig}
+                  value={formValues[inputConfig.name]}
+                  formErrors={formErrors}
+                  formValues={formValues}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  errorMessageStyle={errorMessageStyle}
+                />
+              ))}
             </div>
-          </div>
+          ))}
           <div class="form-line" id="id_3">
             <label className="form-label form-label-top">
               Phone Number
