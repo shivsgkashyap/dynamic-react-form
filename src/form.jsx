@@ -5,7 +5,11 @@ import DynamicInput from "./components/DynamicInput";
 import Recommendations from "./components/Recommendations";
 
 export default function Form({ sections }) {
-  const [formValues, setFormValues] = useState({});
+  const initialValues = sections.reduce((sectionsObj, config) => {
+    sectionsObj[config.name] = config.initialValue;
+    return sectionsObj;
+  }, {});
+  const [formValues, setFormValues] = useState({ initialValues });
   const [formErrors, setFormErrors] = useState({});
   const [touched, setTouched] = useState([]);
   const [isSubmitting, setSubmitting] = useState(false);
@@ -107,14 +111,18 @@ export default function Form({ sections }) {
 
   const formLineStyle = {
     "background-color":
-      formErrors.firstName || formErrors.lastName ? "#ffeded" : "white",
+      formErrors.firstName || formErrors.lastName || formErrors.address
+        ? "#ffeded"
+        : "white",
   };
 
   const errorMessageStyle = {
     visibility:
-      formErrors.firstName || formErrors.lastName ? "visible" : "hidden",
+      formErrors.firstName || formErrors.lastName || formErrors.address
+        ? "visible"
+        : "hidden",
   };
-  console.log(formErrors);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-all">
@@ -174,36 +182,20 @@ export default function Form({ sections }) {
               <h1 className="form-header-text">Customer Details:</h1>
             </div>
           </div>
-          {sections.map((section) => (
+          {/* {sections.map((section) => (
             <div className="form-line" style={formLineStyle}>
               {section.map((inputConfig) => (
                 <DynamicInput
                   inputConfig={inputConfig}
                   value={formValues[inputConfig.name]}
                   formErrors={formErrors}
-                  formValues={formValues}
                   handleChange={handleChange}
                   handleBlur={handleBlur}
                   errorMessageStyle={errorMessageStyle}
                 />
               ))}
             </div>
-          ))}
-          {sections.map((section) => (
-            <div className="form-line" style={formLineStyle}>
-              {section.map((inputConfig) => (
-                <DynamicInput
-                  inputConfig={inputConfig}
-                  value={formValues[inputConfig.name]}
-                  formErrors={formErrors}
-                  formValues={formValues}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  errorMessageStyle={errorMessageStyle}
-                />
-              ))}
-            </div>
-          ))}
+          ))} */}
           <div class="form-line" id="id_3">
             <label className="form-label form-label-top">
               Phone Number
