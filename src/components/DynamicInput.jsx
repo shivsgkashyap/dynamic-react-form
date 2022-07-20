@@ -3,45 +3,45 @@ import React from "react";
 export default function DynamicInput({
   value,
   formErrors,
-  formValues,
   handleChange,
   handleBlur,
   errorMessageStyle,
   inputConfig: { name, type, initialValue, errorMessageFunction },
 }) {
-  if (type === "name") {
+  if (type === "firstName") {
     return (
       <>
-        <label className="form-label form-label-top">
-          Full Name
+        <label className="form-label">
+          {label}
           <span className="form-required"> * </span>
         </label>
         <div className="name-input">
           <div className="input-wrapper">
             <div className="form-sub-label-container first-name">
               <input
-                type="text"
-                name="firstName"
+                type={type}
+                name={name}
                 className={
-                  formErrors[value] ? "error-input-box" : "name-input-box"
+                  formErrors[name] ? "error-input-box" : "name-input-box"
                 }
-                value={formValues[value]}
+                value={value}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
               <label className="form-sub-label"> First Name </label>
             </div>
+
             <div
               className="form-sub-label-container sub-label-media"
               style={{ "margin-left": "24px" }}
             >
               <input
-                type="text"
-                name="lastName"
+                type={type}
+                name={name}
                 className={
                   formErrors[value] ? "error-input-box" : "name-input-box"
                 }
-                value={formValues[value]}
+                value={value}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
@@ -50,7 +50,7 @@ export default function DynamicInput({
           </div>
           <div class="form-error-message" style={errorMessageStyle}>
             <img src="https://cdn.jotfor.ms/images/exclamation-octagon.png" />
-            {formErrors.firstName || formErrors.lastName}
+            {errorMessageFunction(value)}
           </div>
         </div>
       </>
@@ -68,14 +68,14 @@ export default function DynamicInput({
               <div className="form-address-street-line">
                 <div className="form-sub-label-container">
                   <input
-                    type="text"
-                    name="address"
+                    type={type}
+                    name={name}
                     className={
                       formErrors[value]
                         ? "error-input-box"
                         : "address-input-box"
                     }
-                    value={formValues[value]}
+                    value={value}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -83,18 +83,19 @@ export default function DynamicInput({
                 </div>
               </div>
             </div>
+
             <div className="form-address-line-wrapper">
               <div className="form-address-street-line">
                 <div className="form-sub-label-container">
                   <input
-                    type="text"
-                    name="address"
+                    type={type}
+                    name={name}
                     className={
                       formErrors[value]
                         ? "error-input-box"
                         : "address-input-box"
                     }
-                    value={formValues[value]}
+                    value={value}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -104,24 +105,37 @@ export default function DynamicInput({
                 </div>
               </div>
             </div>
+
             <div className="form-address-line-wrapper">
               <div className="form-address-city-line">
                 <div className="form-sub-label-container">
-                  <input type="text" className="address-input-box" />
-                  <label className="form-sub-label"> City </label>
-                </div>
-              </div>
-              <div className="form-address-state-line sub-label-media">
-                <div className="form-sub-label-container">
                   <input
-                    type="text"
-                    name="address"
+                    type={type}
+                    name={name}
                     className={
                       formErrors[value]
                         ? "error-input-box"
                         : "address-input-box"
                     }
-                    value={formValues[value]}
+                    value={value}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  <label className="form-sub-label"> City </label>
+                </div>
+              </div>
+
+              <div className="form-address-state-line sub-label-media">
+                <div className="form-sub-label-container">
+                  <input
+                    type={type}
+                    name={name}
+                    className={
+                      formErrors[value]
+                        ? "error-input-box"
+                        : "address-input-box"
+                    }
+                    value={value}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -129,18 +143,19 @@ export default function DynamicInput({
                 </div>
               </div>
             </div>
+
             <div className="form-address-line-wrapper">
               <div className="form-address-zip-line">
                 <div className="form-sub-label-container">
                   <input
-                    type="text"
-                    name="address"
+                    type={type}
+                    name={name}
                     className={
                       formErrors[value]
                         ? "error-input-box"
                         : "address-input-box"
                     }
-                    value={formValues[value]}
+                    value={value}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -148,17 +163,23 @@ export default function DynamicInput({
                 </div>
               </div>
             </div>
+            <div class="form-error-message" style={errorMessageStyle}>
+              <img src="https://cdn.jotfor.ms/images/exclamation-octagon.png" />
+              {formErrors.address}
+            </div>
           </div>
         </div>
       </>
     );
   } else
     return (
-      <input
-        type={type}
-        name={name}
-        onChange={(e) => onChange(name, e.target.value)}
-        placeholder={name}
-      />
+      <div class="form-line-wrapper">
+        <input
+          type={type}
+          name={name}
+          onChange={(e) => onChange(name, e.target.value)}
+          placeholder={name}
+        />
+      </div>
     );
 }
