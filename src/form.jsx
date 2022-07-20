@@ -9,7 +9,7 @@ export default function Form({ sections }) {
     sectionsObj[config.name] = config.initialValue;
     return sectionsObj;
   }, {});
-  const [formValues, setFormValues] = useState({ initialValues });
+  const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [touched, setTouched] = useState([]);
   const [isSubmitting, setSubmitting] = useState(false);
@@ -182,20 +182,18 @@ export default function Form({ sections }) {
               <h1 className="form-header-text">Customer Details:</h1>
             </div>
           </div>
-          {/* {sections.map((section) => (
+          {sections.map((inputConfig) => (
             <div className="form-line" style={formLineStyle}>
-              {section.map((inputConfig) => (
-                <DynamicInput
-                  inputConfig={inputConfig}
-                  value={formValues[inputConfig.name]}
-                  formErrors={formErrors}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  errorMessageStyle={errorMessageStyle}
-                />
-              ))}
+              <DynamicInput
+                inputConfig={inputConfig}
+                value={formValues[inputConfig.name]}
+                formErrors={formErrors}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                errorMessageStyle={errorMessageStyle}
+              />
             </div>
-          ))} */}
+          ))}
           <div class="form-line" id="id_3">
             <label className="form-label form-label-top">
               Phone Number
