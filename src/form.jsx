@@ -29,7 +29,7 @@ export default function Form({ sections }) {
       }
     }
   }, [isSubmitting, formErrors]);
-
+  console.log(sections);
   // Need to rerun after there is a changed to touched
   // This checks to see if there are any errors that should be highlighted
   useEffect(() => {
@@ -126,179 +126,185 @@ export default function Form({ sections }) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-all">
-        <div className="form-flex">
-          <div
-            className={
-              errorMessageVisibility && errorCounter >= 1
-                ? "error-navigation-container"
-                : "error-navigation-container is-success"
-            }
-            style={{
-              visibility: errorMessageVisibility ? "visible" : "hidden",
-            }}
-          >
-            <div className="error-navigation-inner">
-              <span
-                className="error-navigation-message"
-                style={{ display: errorCounter >= 1 ? "block" : "none" }}
-              >
-                {errorCounter > 1 ? "There are " : "There is "}
-                <strong>{errorCounter}</strong>{" "}
-                {errorCounter > 1
-                  ? "errors in this page. Please correct them before moving on."
-                  : "error in this page. Please correct it before moving on."}
-              </span>
-              <span
-                className="error-navigation-message"
-                style={{ display: errorCounter < 1 ? "block" : "none" }}
-              >
-                Well done! All errors are fixed.
-              </span>
-              <button
-                className="error-navigation-next-button"
-                type="button"
-                onClick={handleErrorClick}
-                style={{ visibility: errorCounter >= 1 ? "visible" : "hidden" }}
-              >
-                See Errors
-              </button>
-              <button
-                className="error-navigation-done-button"
-                style={{
-                  display:
-                    errorMessageVisibility && errorCounter < 1
-                      ? "block"
-                      : "none",
-                }}
-                type="button"
-                onClick={handleDoneClick}
-              >
-                Done
-              </button>
+        <div
+          className={
+            errorMessageVisibility && errorCounter >= 1
+              ? "error-navigation-container"
+              : "error-navigation-container is-success"
+          }
+          style={{
+            visibility: errorMessageVisibility ? "visible" : "hidden",
+          }}
+        >
+          <div className="error-navigation-inner">
+            <span
+              className="error-navigation-message"
+              style={{ display: errorCounter >= 1 ? "block" : "none" }}
+            >
+              {errorCounter > 1 ? "There are " : "There is "}
+              <strong>{errorCounter}</strong>{" "}
+              {errorCounter > 1
+                ? "errors in this page. Please correct them before moving on."
+                : "error in this page. Please correct it before moving on."}
+            </span>
+            <span
+              className="error-navigation-message"
+              style={{ display: errorCounter < 1 ? "block" : "none" }}
+            >
+              Well done! All errors are fixed.
+            </span>
+            <button
+              className="error-navigation-next-button"
+              type="button"
+              onClick={handleErrorClick}
+              style={{ visibility: errorCounter >= 1 ? "visible" : "hidden" }}
+            >
+              See Errors
+            </button>
+            <button
+              className="error-navigation-done-button"
+              style={{
+                display:
+                  errorMessageVisibility && errorCounter < 1 ? "block" : "none",
+              }}
+              type="button"
+              onClick={handleDoneClick}
+            >
+              Done
+            </button>
+          </div>
+        </div>
+        <div className="header-container">
+          <div className="form-header">
+            <h1 className="form-header-text">Customer Details:</h1>
+          </div>
+        </div>
+        {sections.map((section) => (
+          <div className="form-line" style={formLineStyle}>
+            <label className="form-label">
+              {section[0].label}
+              {section[0].errorMessageFunction ? (
+                <span className="form-required">*</span>
+              ) : null}
+            </label>
+            <div className="test-input">
+              {section.map((inputConfig) => (
+                <DynamicInput
+                  inputConfig={inputConfig}
+                  value={formValues[inputConfig.name]}
+                  formErrors={formErrors}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  errorMessageStyle={errorMessageStyle}
+                />
+              ))}
             </div>
           </div>
-          <div className="header-container">
-            <div className="form-header">
-              <h1 className="form-header-text">Customer Details:</h1>
-            </div>
-          </div>
-          {sections.map((inputConfig) => (
-            <div className="form-line" style={formLineStyle}>
-              <DynamicInput
-                inputConfig={inputConfig}
-                value={formValues[inputConfig.name]}
-                formErrors={formErrors}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                errorMessageStyle={errorMessageStyle}
+        ))}
+        <div class="form-line" id="id_3">
+          <label className="form-label form-label-top">
+            Phone Number
+            <span class="form-required"> * </span>
+          </label>
+          <div className="phone-number-input">
+            <div className="form-sub-label-container">
+              <input
+                type="tel"
+                name="number"
+                className={
+                  formErrors.number
+                    ? "error-input-box"
+                    : "phone-number-input-box"
+                }
+                placeholder="(000) 000-0000"
+                value={formValues.number}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </div>
-          ))}
-          <div class="form-line" id="id_3">
-            <label className="form-label form-label-top">
-              Phone Number
-              <span class="form-required"> * </span>
-            </label>
-            <div className="phone-number-input">
-              <div className="form-sub-label-container">
-                <input
-                  type="tel"
-                  name="number"
-                  className={
-                    formErrors.number
-                      ? "error-input-box"
-                      : "phone-number-input-box"
-                  }
-                  placeholder="(000) 000-0000"
-                  value={formValues.number}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
+            <p> {formErrors.number} </p>
+          </div>
+        </div>
+        <div className="form-line" id="id_4">
+          <label className="form-label form-label-top">E-mail</label>
+          <div className="email-input">
+            <div className="form-sub-label-container">
+              <input
+                type="text"
+                name="email"
+                className={
+                  formErrors.email ? "error-input-box" : "email-input-box"
+                }
+                placeholder="ex: email@yahoo.com"
+                value={formValues.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <label className="form-sub-label"> example@example.com </label>
+            </div>
+            <p> {formErrors.email} </p>
+          </div>
+        </div>
+        <div className="form-line" id="id_5">
+          <label className="form-label form-label-top">
+            How did you hear about us?
+          </label>
+          <div className="hear-input">
+            <select class="hear-dropdown">
+              <option value=""> Please Select </option>
+              <option value="Newspaper"> Newspaper </option>
+              <option value="Internet"> Internet </option>
+              <option value="Magazine"> Magazine </option>
+              <option value="Other (Please specify...)">
+                Other (Please specify...)
+              </option>
+            </select>
+          </div>
+        </div>
+        <div className="form-line" id="id_6">
+          <label className="form-label form-label-top">
+            Feedback about us:
+          </label>
+          <div className="suggestions-input">
+            <textarea className="textarea-input"></textarea>
+          </div>
+        </div>
+        <div className="form-line" id="id_7">
+          <label className="form-label form-label-top">
+            Suggestions if any for further improvement:
+          </label>
+          <div className="suggestions-input">
+            <textarea className="textarea-input"></textarea>
+          </div>
+        </div>
+        <div className="form-line" id="id_8">
+          <label className="form-label form-label-top">
+            Will you be willing to recommend us?
+          </label>
+          <div className="recommend-input">
+            <div className="form-checkboxes">
+              <div className="form-checkbox-item">
+                <input type="checkbox" className="form-checkbox" />
+                <label> Yes </label>
               </div>
-              <p> {formErrors.number} </p>
-            </div>
-          </div>
-          <div className="form-line" id="id_4">
-            <label className="form-label form-label-top">E-mail</label>
-            <div className="email-input">
-              <div className="form-sub-label-container">
-                <input
-                  type="text"
-                  name="email"
-                  className={
-                    formErrors.email ? "error-input-box" : "email-input-box"
-                  }
-                  placeholder="ex: email@yahoo.com"
-                  value={formValues.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <label className="form-sub-label"> example@example.com </label>
+              <div className="form-checkbox-item">
+                <input type="checkbox" className="form-checkbox" />
+                <label> Maybe </label>
               </div>
-              <p> {formErrors.email} </p>
-            </div>
-          </div>
-          <div className="form-line" id="id_5">
-            <label className="form-label form-label-top">
-              How did you hear about us?
-            </label>
-            <div className="hear-input">
-              <select class="hear-dropdown">
-                <option value=""> Please Select </option>
-                <option value="Newspaper"> Newspaper </option>
-                <option value="Internet"> Internet </option>
-                <option value="Magazine"> Magazine </option>
-                <option value="Other (Please specify...)">
-                  Other (Please specify...)
-                </option>
-              </select>
-            </div>
-          </div>
-          <div className="form-line" id="id_6">
-            <label className="form-label form-label-top">
-              Feedback about us:
-            </label>
-            <div className="suggestions-input">
-              <textarea className="textarea-input"></textarea>
-            </div>
-          </div>
-          <div className="form-line" id="id_7">
-            <label className="form-label form-label-top">
-              Suggestions if any for further improvement:
-            </label>
-            <div className="suggestions-input">
-              <textarea className="textarea-input"></textarea>
-            </div>
-          </div>
-          <div className="form-line" id="id_8">
-            <label className="form-label form-label-top">
-              Will you be willing to recommend us?
-            </label>
-            <div className="recommend-input">
-              <div className="form-checkboxes">
-                <div className="form-checkbox-item">
-                  <input type="checkbox" className="form-checkbox" />
-                  <label> Yes </label>
-                </div>
-                <div className="form-checkbox-item">
-                  <input type="checkbox" className="form-checkbox" />
-                  <label> Maybe </label>
-                </div>
-                <div className="form-checkbox-item">
-                  <input type="checkbox" className="form-checkbox" />
-                  <label> No </label>
-                </div>
+              <div className="form-checkbox-item">
+                <input type="checkbox" className="form-checkbox" />
+                <label> No </label>
               </div>
             </div>
           </div>
-          <Recommendations />
-          <div className="form-line" id="id_10">
-            <div className="submit-btn">
-              <div className="form-buttons-wrapper">
-                <button type="submit" className="form-submit-button">
-                  Submit
-                </button>
-              </div>
+        </div>
+        <Recommendations />
+        <div className="form-line" id="id_10">
+          <div className="submit-btn">
+            <div className="form-buttons-wrapper">
+              <button type="submit" className="form-submit-button">
+                Submit
+              </button>
             </div>
           </div>
         </div>

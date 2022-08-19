@@ -18,6 +18,10 @@
   flex-direction: column;
   margin: 72px auto;
   width: 100%;
+  align-items: flex-start;
+  padding: 0 38px;
+  list-style: none;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 480px) {
@@ -33,16 +37,6 @@
     margin: 0 !important;
     padding: 0 14px !important;
   }
-}
-
-.form-flex {
-  display: flex;
-  align-items: flex-start;
-  margin: 0;
-  padding: 0 38px;
-  list-style: none;
-  flex-wrap: wrap;
-  flex-direction: column;
 }
 
 .header-container {
@@ -106,19 +100,23 @@
   margin-left: 4px;
 }
 
-.name-input {
+.test-input {
   width: 100%;
+  outline: none;
+  margin: 0;
+  text-align: left;
+  font-size: 1em;
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-start;
+  gap: 2em;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 480px) {
   .first-name {
     flex: 1 1 48%;
   }
-}
-
-.input-wrapper {
-  display: flex;
-  align-items: flex-start;
 }
 
 @media screen and (max-width: 480px) {
@@ -130,14 +128,10 @@
 .form-sub-label-container {
   vertical-align: top;
   min-width: 0;
-  flex: 1 1 100%;
+  flex: 0 1 100%;
 }
 
-.name-input-box,
-.address-input-box,
-.phone-number-input-box,
-.email-input-box,
-.name-input-box {
+.textbox-input {
   width: 100%;
   outline: none;
   margin: 0;
