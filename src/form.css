@@ -179,57 +179,12 @@ input:hover {
   word-break: break-word;
 }
 
-.address-input {
-  width: 100%;
-}
-
-.address-table {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-}
-.form-address-line-wrapper-top {
-  display: flex;
-  width: 100%;
-}
-
-.form-address-street-line,
-.form-address-zip-line {
-  display: flex;
-  flex: 1 1 100%;
-}
-
-.form-address-line-wrapper {
-  display: flex;
-  margin-top: 24px;
-  width: 100%;
-}
-
-.form-address-city-line,
-.form-address-state-line {
-  display: flex;
-  flex: 1 1 50%;
-}
-
-.form-address-state-line {
-  margin-left: 24px;
-}
-
 @media screen and (max-width: 480px) {
   .phone-number-input,
   .email-input,
   .hear-input {
     width: 100% !important;
   }
-}
-
-.phone-number-input {
-  width: calc(50% - 14px);
-}
-
-.email-input,
-.hear-input {
-  width: calc(50% - 14px);
 }
 
 .suggestions-input {
@@ -265,9 +220,6 @@ input:hover {
 .form-checkbox {
   flex: 0 1 5%;
   margin-bottom: 10px;
-}
-.form-table {
-  width: 100%;
 }
 
 @media screen and (max-width: 480px),

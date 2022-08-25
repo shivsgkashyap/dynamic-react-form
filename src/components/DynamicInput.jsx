@@ -36,12 +36,6 @@ export default function DynamicInput({
         <label className="form-sub-label"> {subLabel} </label>
       </div>
     );
-    // {
-    //   /* <div class="form-error-message" style={errorMessageStyle}>
-    //         <img src="https://cdn.jotfor.ms/images/exclamation-octagon.png" />
-    //         {errorMessageFunction ? errorMessageFunction(value) : null}
-    //       </div> */
-    // }
   } else if (type === "largeTextBox") {
     return (
       <div className="suggestions-input">
