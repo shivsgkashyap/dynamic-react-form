@@ -2,7 +2,6 @@ import react from "react";
 import { useState, useEffect } from "react";
 import "./Form.css";
 import DynamicInput from "./components/DynamicInput";
-import Recommendations from "./components/Recommendations";
 
 export default function Form({ sections }) {
   const initialValues = sections.reduce((sectionsObj, config) => {
@@ -29,7 +28,6 @@ export default function Form({ sections }) {
       }
     }
   }, [isSubmitting, formErrors]);
-  console.log(sections);
   // Need to rerun after there is a changed to touched
   // This checks to see if there are any errors that should be highlighted
   useEffect(() => {
@@ -89,24 +87,21 @@ export default function Form({ sections }) {
   };
 
   const validate = (values) => {
-    const errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
-    if (!values.firstName) {
-      errors.firstName = "This field is required.";
-    }
-    if (!values.lastName) {
-      errors.lastName = "This field is required.";
-    }
-    if (!values.number) {
-      errors.number = "This field is required.";
-    }
-    if (!values.address) {
-      errors.address = "This field is required.";
-    }
-    if (!regex.test(values.email)) {
-      errors.email = "This is not a valid email";
-    }
-    return errors;
+    return sections.reduce((errors, configs) => {
+      configs.forEach((config) => {
+        if (!("errorMessageFunction" in config)) {
+          return errors;
+        }
+
+        const error = config.errorMessageFunction(values[config.name]);
+
+        if (error) {
+          errors[config.name] = error;
+        }
+      });
+
+      return errors;
+    }, {});
   };
 
   const formLineStyle = {
@@ -199,106 +194,11 @@ export default function Form({ sections }) {
                 />
               ))}
             </div>
+            <div class="form-error-message">
+              {section.map((inputConfig) => formErrors[inputConfig.name])}
+            </div>
           </div>
         ))}
-        <div class="form-line" id="id_3">
-          <label className="form-label form-label-top">
-            Phone Number
-            <span class="form-required"> * </span>
-          </label>
-          <div className="phone-number-input">
-            <div className="form-sub-label-container">
-              <input
-                type="tel"
-                name="number"
-                className={
-                  formErrors.number
-                    ? "error-input-box"
-                    : "phone-number-input-box"
-                }
-                placeholder="(000) 000-0000"
-                value={formValues.number}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </div>
-            <p> {formErrors.number} </p>
-          </div>
-        </div>
-        <div className="form-line" id="id_4">
-          <label className="form-label form-label-top">E-mail</label>
-          <div className="email-input">
-            <div className="form-sub-label-container">
-              <input
-                type="text"
-                name="email"
-                className={
-                  formErrors.email ? "error-input-box" : "email-input-box"
-                }
-                placeholder="ex: email@yahoo.com"
-                value={formValues.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              <label className="form-sub-label"> example@example.com </label>
-            </div>
-            <p> {formErrors.email} </p>
-          </div>
-        </div>
-        <div className="form-line" id="id_5">
-          <label className="form-label form-label-top">
-            How did you hear about us?
-          </label>
-          <div className="hear-input">
-            <select class="hear-dropdown">
-              <option value=""> Please Select </option>
-              <option value="Newspaper"> Newspaper </option>
-              <option value="Internet"> Internet </option>
-              <option value="Magazine"> Magazine </option>
-              <option value="Other (Please specify...)">
-                Other (Please specify...)
-              </option>
-            </select>
-          </div>
-        </div>
-        <div className="form-line" id="id_6">
-          <label className="form-label form-label-top">
-            Feedback about us:
-          </label>
-          <div className="suggestions-input">
-            <textarea className="textarea-input"></textarea>
-          </div>
-        </div>
-        <div className="form-line" id="id_7">
-          <label className="form-label form-label-top">
-            Suggestions if any for further improvement:
-          </label>
-          <div className="suggestions-input">
-            <textarea className="textarea-input"></textarea>
-          </div>
-        </div>
-        <div className="form-line" id="id_8">
-          <label className="form-label form-label-top">
-            Will you be willing to recommend us?
-          </label>
-          <div className="recommend-input">
-            <div className="form-checkboxes">
-              <div className="form-checkbox-item">
-                <input type="checkbox" className="form-checkbox" />
-                <label> Yes </label>
-              </div>
-              <div className="form-checkbox-item">
-                <input type="checkbox" className="form-checkbox" />
-                <label> Maybe </label>
-              </div>
-              <div className="form-checkbox-item">
-                <input type="checkbox" className="form-checkbox" />
-                <label> No </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <Recommendations />
         <div className="form-line" id="id_10">
           <div className="submit-btn">
             <div className="form-buttons-wrapper">

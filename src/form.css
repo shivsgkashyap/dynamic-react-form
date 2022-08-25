@@ -199,10 +199,6 @@ input:hover {
   flex: 1 1 100%;
 }
 
-.form-sub-label-container {
-  flex: 1 1 100%;
-}
-
 .form-address-line-wrapper {
   display: flex;
   margin-top: 24px;
@@ -303,11 +299,7 @@ input:hover {
   display: grid;
   grid-template-columns: 10% 25% 25% 40%;
   width: 100%;
-}
-
-.form-textbox,
-.grid-cell {
-  width: 100%;
+  margin-top: 1em;
 }
 
 .form-matrix-values {
@@ -316,21 +308,16 @@ input:hover {
   position: relative;
 }
 
-.small-top {
-  border: none;
-}
-
 .top-style {
   text-align: center;
   border-top: 1px solid #c3cad8;
   background-color: #e5eaf4;
-  position: relative;
   font-size: 0.75em;
   font-weight: 500;
   padding: 12px;
 }
 
-.name-style {
+.first-style {
   border-radius: 4px 0 0;
 }
 
@@ -338,29 +325,25 @@ input:hover {
   border-right: 1px solid #c3cad8;
 }
 
-#smooth-style-top {
+.top-style.end-style {
   border-radius: 0 4px 0;
 }
 
-#smooth-style-bottom {
+.bottom-style.end-style {
   border-radius: 0 0 4px;
 }
 
+.small-top {
+  visibility: hidden;
+}
+
+.small-top,
 .small-middle,
 .small-bottom {
   background-color: #e5eaf4;
-  position: relative;
   font-size: 0.75em;
   font-weight: 500;
   padding: 12px;
-}
-
-.middle-style,
-.bottom-style {
-  background-color: #fff;
-  text-align: center;
-  padding: 0;
-  position: relative;
 }
 
 .small-bottom {
