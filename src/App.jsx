@@ -13,7 +13,7 @@ function App() {
               type: "smallTextBox",
               initialValue: "",
               errorMessageFunction: (value) =>
-                !value ? "This field is required" : null,
+                !value ? "This field is required!" : null,
               subLabel: "First Name",
               width: "47",
             },
@@ -22,7 +22,7 @@ function App() {
               type: "smallTextBox",
               initialValue: "",
               errorMessageFunction: (value) =>
-                !value ? "This field is required" : null,
+                !value ? "This field is required!" : null,
               subLabel: "Last Name",
               width: "47",
             },
@@ -34,7 +34,7 @@ function App() {
               type: "smallTextBox",
               initialValue: "",
               errorMessageFunction: (value) =>
-                !value ? "This field is required" : null,
+                !value ? "This field is required!" : null,
               subLabel: "Address Line One",
             },
             {
@@ -50,7 +50,7 @@ function App() {
               type: "smallTextBox",
               initialValue: "",
               errorMessageFunction: (value) =>
-                !value ? "This field is required" : null,
+                !value ? "This field is required!" : null,
               subLabel: "State",
               width: "47",
             },
@@ -70,7 +70,7 @@ function App() {
               placeHolder: "(000) 000-0000",
               initialValue: "",
               errorMessageFunction: (value) =>
-                !value ? "This field is random!" : null,
+                !value ? "This field is required!" : null,
               width: "47",
             },
           ],

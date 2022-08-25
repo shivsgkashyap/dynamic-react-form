@@ -4,8 +4,10 @@ import "./Form.css";
 import DynamicInput from "./components/DynamicInput";
 
 export default function Form({ sections }) {
-  const initialValues = sections.reduce((sectionsObj, config) => {
-    sectionsObj[config.name] = config.initialValue;
+  const initialValues = sections.reduce((sectionsObj, configs) => {
+    configs.forEach((config) => {
+      sectionsObj[config.name] = config.initialValue;
+    });
     return sectionsObj;
   }, {});
   const [formValues, setFormValues] = useState(initialValues);
@@ -77,7 +79,7 @@ export default function Form({ sections }) {
   const handleErrorClick = (e) => {
     const keys = Object.keys(formErrors);
     if (keys.length > 0) {
-      const errorElement = document.querySelector(`input[name="${keys[0]}"]`);
+      const errorElement = document.querySelector(`[name="${keys[0]}"]`);
       errorElement.scrollIntoView({
         behavior: "smooth",
         block: "center",
