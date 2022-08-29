@@ -106,20 +106,6 @@ export default function Form({ sections }) {
     }, {});
   };
 
-  const formLineStyle = {
-    "background-color":
-      formErrors.firstName || formErrors.lastName || formErrors.address
-        ? "#ffeded"
-        : "white",
-  };
-
-  const errorMessageStyle = {
-    visibility:
-      formErrors.firstName || formErrors.lastName || formErrors.address
-        ? "visible"
-        : "hidden",
-  };
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-all">
@@ -177,7 +163,14 @@ export default function Form({ sections }) {
           </div>
         </div>
         {sections.map((section) => (
-          <div className="form-line" style={formLineStyle}>
+          <div
+            className="form-line"
+            style={
+              section.some((inputConfig) => formErrors[inputConfig.name])
+                ? { backgroundColor: "#ffeded" }
+                : { backgroundColor: "white" }
+            }
+          >
             <label className="form-label">
               {section[0].label}
               {section[0].errorMessageFunction ? (
@@ -192,12 +185,8 @@ export default function Form({ sections }) {
                   formErrors={formErrors}
                   handleChange={handleChange}
                   handleBlur={handleBlur}
-                  errorMessageStyle={errorMessageStyle}
                 />
               ))}
-            </div>
-            <div class="form-error-message">
-              {section.map((inputConfig) => formErrors[inputConfig.name])}
             </div>
           </div>
         ))}

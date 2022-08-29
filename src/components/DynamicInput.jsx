@@ -5,7 +5,6 @@ export default function DynamicInput({
   formErrors,
   handleChange,
   handleBlur,
-  errorMessageStyle,
   inputConfig: {
     label,
     name,
@@ -33,13 +32,21 @@ export default function DynamicInput({
           onBlur={handleBlur}
           placeholder={placeHolder}
         />
-        <label className="form-sub-label"> {subLabel} </label>
+        {subLabel ? (
+          <label className="form-sub-label"> {subLabel} </label>
+        ) : null}
+        {formErrors[name] ? (
+          <div class="form-error-message">{formErrors[name]}</div>
+        ) : null}
       </div>
     );
   } else if (type === "largeTextBox") {
     return (
       <div className="suggestions-input">
         <textarea className="textarea-input"></textarea>
+        {formErrors[name] ? (
+          <div class="form-error-message">{formErrors[name]}</div>
+        ) : null}
       </div>
     );
   } else if (type === "dropdown") {
@@ -51,6 +58,9 @@ export default function DynamicInput({
             <option value={option}> {option} </option>
           ))}
         </select>
+        {formErrors[name] ? (
+          <div class="form-error-message">{formErrors[name]}</div>
+        ) : null}
       </div>
     );
   } else if (type === "checkbox") {
@@ -62,6 +72,9 @@ export default function DynamicInput({
             <label> {option} </label>
           </div>
         ))}
+        {formErrors[name] ? (
+          <div class="form-error-message">{formErrors[name]}</div>
+        ) : null}
       </div>
     );
   } else if (type === "referenceBox") {
@@ -101,6 +114,9 @@ export default function DynamicInput({
         <div className="form-matrix-values bottom-style end-style">
           <input type="text" className="form-textbox" />
         </div>
+        {formErrors[name] ? (
+          <div class="form-error-message">{formErrors[name]}</div>
+        ) : null}
       </div>
     );
   } else {
