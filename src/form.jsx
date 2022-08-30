@@ -2,6 +2,15 @@ import react from "react";
 import { useState, useEffect } from "react";
 import "./Form.css";
 import DynamicInput from "./components/DynamicInput";
+import {
+  ErrorBanner,
+  FormAll,
+  FormLabelStyle,
+  HeaderStyle,
+  SubmitButton,
+  UserInput,
+} from "./components/styles/Form.Style";
+import { GlobalStyle } from "./components/styles/GlobalStyles.Style";
 
 export default function Form({ sections }) {
   const initialValues = sections.reduce((sectionsObj, configs) => {
@@ -107,61 +116,37 @@ export default function Form({ sections }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-all">
-        <div
-          className={
-            errorMessageVisibility && errorCounter >= 1
-              ? "error-navigation-container"
-              : "error-navigation-container is-success"
-          }
-          style={{
-            visibility: errorMessageVisibility ? "visible" : "hidden",
-          }}
+    <GlobalStyle onSubmit={handleSubmit}>
+      <FormAll>
+        <ErrorBanner
+          errorCounter={errorCounter}
+          errorMessageVisibility={errorMessageVisibility}
         >
           <div className="error-navigation-inner">
-            <span
-              className="error-navigation-message"
-              style={{ display: errorCounter >= 1 ? "block" : "none" }}
-            >
+            <span className="error-navigation-message">
               {errorCounter > 1 ? "There are " : "There is "}
-              <strong>{errorCounter}</strong>{" "}
+              <strong>{errorCounter}</strong>
               {errorCounter > 1
-                ? "errors in this page. Please correct them before moving on."
-                : "error in this page. Please correct it before moving on."}
+                ? " errors in this page. Please correct them before moving on."
+                : " error in this page. Please correct it before moving on."}
             </span>
-            <span
-              className="error-navigation-message"
-              style={{ display: errorCounter < 1 ? "block" : "none" }}
-            >
+            <span className="error-navigation-message-2">
               Well done! All errors are fixed.
             </span>
             <button
-              className="error-navigation-next-button"
+              className="error-navigation-button"
               type="button"
-              onClick={handleErrorClick}
-              style={{ visibility: errorCounter >= 1 ? "visible" : "hidden" }}
+              onClick={errorCounter >= 1 ? handleErrorClick : handleDoneClick}
             >
-              See Errors
-            </button>
-            <button
-              className="error-navigation-done-button"
-              style={{
-                display:
-                  errorMessageVisibility && errorCounter < 1 ? "block" : "none",
-              }}
-              type="button"
-              onClick={handleDoneClick}
-            >
-              Done
+              {errorCounter >= 1 ? "See Errors" : "Done"}
             </button>
           </div>
-        </div>
-        <div className="header-container">
+        </ErrorBanner>
+        <HeaderStyle>
           <div className="form-header">
             <h1 className="form-header-text">Customer Details:</h1>
           </div>
-        </div>
+        </HeaderStyle>
         {sections.map((section) => (
           <div
             className="form-line"
@@ -171,13 +156,13 @@ export default function Form({ sections }) {
                 : { backgroundColor: "white" }
             }
           >
-            <label className="form-label">
+            <FormLabelStyle>
               {section[0].label}
               {section[0].errorMessageFunction ? (
                 <span className="form-required">*</span>
               ) : null}
-            </label>
-            <div className="test-input">
+            </FormLabelStyle>
+            <UserInput>
               {section.map((inputConfig) => (
                 <DynamicInput
                   inputConfig={inputConfig}
@@ -187,19 +172,17 @@ export default function Form({ sections }) {
                   handleBlur={handleBlur}
                 />
               ))}
-            </div>
+            </UserInput>
           </div>
         ))}
-        <div className="form-line" id="id_10">
-          <div className="submit-btn">
-            <div className="form-buttons-wrapper">
-              <button type="submit" className="form-submit-button">
-                Submit
-              </button>
-            </div>
+        <SubmitButton>
+          <div className="form-buttons-wrapper">
+            <button type="submit" className="form-submit-button">
+              Submit
+            </button>
           </div>
-        </div>
-      </div>
-    </form>
+        </SubmitButton>
+      </FormAll>
+    </GlobalStyle>
   );
 }
