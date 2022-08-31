@@ -1,11 +1,11 @@
 import react from "react";
 import { useState, useEffect } from "react";
-import "./Form.css";
 import DynamicInput from "./components/DynamicInput";
 import {
   ErrorBanner,
   FormAll,
   FormLabelStyle,
+  FormLineStyle,
   HeaderStyle,
   SubmitButton,
   UserInput,
@@ -148,12 +148,11 @@ export default function Form({ sections }) {
           </div>
         </HeaderStyle>
         {sections.map((section) => (
-          <div
-            className="form-line"
-            style={
+          <FormLineStyle
+            bg={
               section.some((inputConfig) => formErrors[inputConfig.name])
-                ? { backgroundColor: "#ffeded" }
-                : { backgroundColor: "white" }
+                ? "#ffeded"
+                : "white"
             }
           >
             <FormLabelStyle>
@@ -173,7 +172,7 @@ export default function Form({ sections }) {
                 />
               ))}
             </UserInput>
-          </div>
+          </FormLineStyle>
         ))}
         <SubmitButton>
           <div className="form-buttons-wrapper">

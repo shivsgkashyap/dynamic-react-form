@@ -119,6 +119,40 @@ export const FormLabelStyle = styled.label`
   }
 `;
 
+export const FormLineStyle = styled.div`
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 12px 10px;
+  margin: 29px 4px 0px;
+  border-radius: 3px;
+  position: relative;
+  width: 100%;
+  transition: background-color 0.15s;
+  background-color: ${(props) => props.bg};
+`;
+
+export const InputField = styled.div`
+  input {
+    width: 100%;
+    outline: none;
+    margin: 0;
+    text-align: left;
+    font-size: 1em;
+    border-radius: 4px;
+    padding: 0 0.625em;
+    height: 2.5em;
+    border: ${(props) =>
+      props.border ? "1px solid red" : "1px solid #b8bdc9"};
+
+    &:hover {
+      border-color: ${(props) => (props.border ? "red" : "blue")};
+    }
+  }
+`;
+
 export const UserInput = styled.div`
   width: 100%;
   outline: none;
@@ -147,18 +181,6 @@ export const UserInput = styled.div`
     vertical-align: top;
     min-width: 0;
     flex: 0 1 100%;
-  }
-
-  .textbox-input {
-    width: 100%;
-    outline: none;
-    margin: 0;
-    text-align: left;
-    font-size: 1em;
-    border-radius: 4px;
-    padding: 0 0.625em;
-    height: 2.5em;
-    border: 1px solid #b8bdc9;
   }
 
   @media screen and (max-width: 480px) {

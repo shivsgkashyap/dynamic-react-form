@@ -1,5 +1,6 @@
 import React from "react";
 import c from "classnames";
+import { InputField } from "./styles/Form.Style";
 export default function DynamicInput({
   value,
   formErrors,
@@ -23,15 +24,16 @@ export default function DynamicInput({
         className="form-sub-label-container"
         style={{ flexBasis: width + "%" }}
       >
-        <input
-          type={type}
-          name={name}
-          className={formErrors[name] ? "error-input-box" : "textbox-input"}
-          value={value}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          placeholder={placeHolder}
-        />
+        <InputField border={formErrors[name]}>
+          <input
+            type={type}
+            name={name}
+            value={value}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder={placeHolder}
+          />
+        </InputField>
         {subLabel ? (
           <label className="form-sub-label"> {subLabel} </label>
         ) : null}
