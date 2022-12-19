@@ -148,7 +148,8 @@ export const InputField = styled.div`
       props.border ? "1px solid red" : "1px solid #b8bdc9"};
 
     &:hover {
-      border-color: ${(props) => (props.border ? "red" : "blue")};
+      border: ${(props) =>
+        props.border ? "1.5px solid red" : "1.5px solid blue"};
     }
   }
 `;
