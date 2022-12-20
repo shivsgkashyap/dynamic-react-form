@@ -9,8 +9,8 @@ import {
   HeaderStyle,
   SubmitButton,
   UserInput,
+  GlobalFormStyle,
 } from "./components/styles/Form.Style";
-import { GlobalStyle } from "./components/styles/GlobalStyles.Style";
 
 export default function Form({ sections }) {
   const initialValues = sections.reduce((sectionsObj, configs) => {
@@ -116,7 +116,7 @@ export default function Form({ sections }) {
   };
 
   return (
-    <GlobalStyle onSubmit={handleSubmit}>
+    <GlobalFormStyle onSubmit={handleSubmit}>
       <FormAll>
         <ErrorBanner
           errorCounter={errorCounter}
@@ -182,6 +182,6 @@ export default function Form({ sections }) {
           </div>
         </SubmitButton>
       </FormAll>
-    </GlobalStyle>
+    </GlobalFormStyle>
   );
 }

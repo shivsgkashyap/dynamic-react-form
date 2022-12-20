@@ -38,7 +38,7 @@ export default function DynamicInput({
           <label className="form-sub-label"> {subLabel} </label>
         ) : null}
         {formErrors[name] ? (
-          <div class="form-error-message">{formErrors[name]}</div>
+          <div className="form-error-message">{formErrors[name]}</div>
         ) : null}
       </div>
     );
@@ -47,21 +47,21 @@ export default function DynamicInput({
       <div className="suggestions-input">
         <textarea className="textarea-input"></textarea>
         {formErrors[name] ? (
-          <div class="form-error-message">{formErrors[name]}</div>
+          <div className="form-error-message">{formErrors[name]}</div>
         ) : null}
       </div>
     );
   } else if (type === "dropdown") {
     return (
       <div className="hear-input">
-        <select class="hear-dropdown">
+        <select className="hear-dropdown">
           <option value=""> Please Select </option>
           {options.map((option) => (
             <option value={option}> {option} </option>
           ))}
         </select>
         {formErrors[name] ? (
-          <div class="form-error-message">{formErrors[name]}</div>
+          <div className="form-error-message">{formErrors[name]}</div>
         ) : null}
       </div>
     );
@@ -75,7 +75,7 @@ export default function DynamicInput({
           </div>
         ))}
         {formErrors[name] ? (
-          <div class="form-error-message">{formErrors[name]}</div>
+          <div className="form-error-message">{formErrors[name]}</div>
         ) : null}
       </div>
     );
@@ -117,7 +117,7 @@ export default function DynamicInput({
           <input type="text" className="form-textbox" />
         </div>
         {formErrors[name] ? (
-          <div class="form-error-message">{formErrors[name]}</div>
+          <div className="form-error-message">{formErrors[name]}</div>
         ) : null}
       </div>
     );

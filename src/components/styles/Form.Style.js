@@ -1,5 +1,19 @@
 import styled from "styled-components";
 
+export const GlobalFormStyle = styled.form`
+  box-sizing: border-box;
+  letter-spacing: 0.3px;
+
+  img {
+    width: 0.875em;
+    margin-right: 0.5em;
+  }
+
+  button {
+    outline: 0;
+  }
+`;
+
 export const FormAll = styled.div`
   border-radius: 3px;
   box-shadow: 0 4px 4px rgb(87 100 126 / 21%);

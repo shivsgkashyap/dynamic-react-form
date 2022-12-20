@@ -1,10 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import App from "./App";
+import { GlobalStyle } from "./components/styles/GlobalStyles.Style";
 
-ReactDOM.render(
-  <React.StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.Fragment>
+    <GlobalStyle />
     <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.Fragment>
 );
