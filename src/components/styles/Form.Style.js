@@ -412,3 +412,30 @@ export const ErrorBanner = styled.div`
     }
   }
 `;
+
+export const FooterStyle = styled.footer`
+  display: flex;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
+
+  p {
+    color: white;
+  }
+
+  a {
+    align-self: center;
+    margin-left: 0.5em;
+  }
+
+  img {
+    height: 1.5em;
+    width: 1.5em;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  img:hover {
+    transform: rotate(360deg) scale(1.2);
+  }
+`;
