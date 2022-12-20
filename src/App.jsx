@@ -2,7 +2,7 @@ import Form from "./Form.jsx";
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <Form
         sections={[
           [
@@ -130,7 +130,7 @@ function App() {
           ],
         ]}
       />
-    </div>
+    </main>
   );
 }
 

@@ -40,7 +40,7 @@ export const FormAll = styled.div`
   }
 `;
 
-export const HeaderStyle = styled.div`
+export const HeaderStyle = styled.header`
   width: 100%;
 
   @media screen and (max-width: 480px) {
@@ -68,7 +68,7 @@ export const HeaderStyle = styled.div`
   }
 `;
 
-export const SubmitButton = styled.div`
+export const SubmitButton = styled.section`
   width: 100%;
 
   .form-buttons-wrapper {
@@ -133,7 +133,7 @@ export const FormLabelStyle = styled.label`
   }
 `;
 
-export const FormLineStyle = styled.div`
+export const FormLineStyle = styled.section`
   margin-top: 12px;
   margin-bottom: 12px;
   display: flex;
