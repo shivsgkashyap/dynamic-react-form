@@ -1,9 +1,12 @@
 {
+  "homepage": "https://shivsgkashyap.github.io/dynamic-react-form/",
   "name": "form-project",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -16,6 +19,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
+    "gh-pages": "^4.0.0",
     "vite": "^2.7.2"
   }
 }
