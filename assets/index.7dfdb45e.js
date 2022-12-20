@@ -427,4 +427,4 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-`;var ie="/<dynamic-react-form>/assets/github.ecbb1b13.png";function ae(){return l(X,{children:[l("p",{children:["Copyright \xA9 ",new Date().getFullYear()," Shiv Kashyap"]}),t("a",{href:"https://github.com/shivsgkashyap",target:"_blank",children:t("img",{src:ie,alt:"Github Logo"})})]})}P.createRoot(document.getElementById("root")).render(l(D.Fragment,{children:[t(re,{}),t(te,{}),t(ae,{})]}));
+`;var ie="/dynamic-react-form/assets/github.ecbb1b13.png";function ae(){return l(X,{children:[l("p",{children:["Copyright \xA9 ",new Date().getFullYear()," Shiv Kashyap"]}),t("a",{href:"https://github.com/shivsgkashyap",target:"_blank",children:t("img",{src:ie,alt:"Github Logo"})})]})}P.createRoot(document.getElementById("root")).render(l(D.Fragment,{children:[t(re,{}),t(te,{}),t(ae,{})]}));
